@@ -11,6 +11,14 @@ output_info(){
     echo "$(tput bold)[ $1 ]$(tput sgr0)"
 }
 
+if [ $(which git) ]
+then
+    git clone https://github.com/OctagonCommerce/pre-hire.git $HOME/pre-hire
+else
+    echo "git command not found. Please install git and try again."
+    exit 1
+fi
+
 output_status "Checking system"
 
 if [ $(which gollum) ]
@@ -48,6 +56,8 @@ fi
 # Check to see if the latest version of gollum is installed
 
 output_status "Launching gollum"
+
+cd $HOME/pre-hire
 gollum 2> /dev/null &
 
 sleep 5
